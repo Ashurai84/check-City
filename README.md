@@ -17,13 +17,15 @@ npm install @ashuhrai_71/city-count
 const checkCityCount = require('@ashuhrai_71/city-count');
 
 const data = [
-  { name: 'Alice', city: 'New York' },
-  { name: 'Bob', city: 'London' },
-  { name: 'Charlie', city: 'New York' },
-  { name: 'Diana', city: 'Paris' }
+  { name: 'Saurabh', city: 'Mumbai' },
+  { name: 'Tejas', city: 'Pune' },
+  { name: 'Ashutosh', city: 'Delhi' },
+  { name: 'Priya', city: 'Mumbai' },
+  { name: 'Rahul', city: 'Pune' },
+  { name: 'Neha', city: 'Delhi' }
 ];
 
-const count = checkCityCount(data, 'New York');
+const count = checkCityCount(data, 'Mumbai');
 console.log(count); // Output: 2
 ```
 
