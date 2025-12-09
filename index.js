@@ -5,12 +5,7 @@ function checkCityCount(data, city) {
             count++
         }
     })
-
     return count;
 }
 
 export default checkCityCount;
-
- 
-
-module.exports = checkCityCount;
