@@ -1,6 +1,6 @@
 {
-  "name": "check-city",
-  "version": "1.0.0",
+  "name": "@ashuhrai_71/city-count",
+  "version": "1.0.1",
   "description": "A package to count how many people are in each city",
   "main": "index.js",
   "scripts": {
