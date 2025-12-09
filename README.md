@@ -51,42 +51,28 @@ console.log(`People in Delhi: ${delhiCount}`);
 // Output: People in Delhi: 2
 ```
 
-### Real-World Use Case: Express.js API
+### With Express.js
 
 ```javascript
-import express from "express";
-import cors from "cors";
-import checkCityCount from "@ashuhrai_71/city-count";
+const express = require('express');
+const checkCityCount = require('@ashuhrai_71/city-count');
 
 const app = express();
-app.use(cors());
 
-// User data
 const users = [
-  { name: "Saurabh", city: "Mumbai" },
-  { name: "Tejas", city: "Pune" },
-  { name: "Ashutosh", city: "Delhi" },
-  { name: "Priya", city: "Mumbai" },
-  { name: "Rahul", city: "Pune" },
-  { name: "Neha", city: "Delhi" }
+  { name: 'John', city: 'Mumbai' },
+  { name: 'Jane', city: 'Delhi' },
+  { name: 'Bob', city: 'Mumbai' }
 ];
 
-// Get all users and log city count
-app.get("/api/v1/users", (req, res) => {
-  res.json(users);
-  
-  const count = checkCityCount(users, "Mumbai");
-  console.log("Number of users in Mumbai:", count);
-  // Output: Number of users in Mumbai: 2
+app.get('/city-count/:city', (req, res) => {
+  const count = checkCityCount(users, req.params.city);
+  res.json({ city: req.params.city, count });
 });
 
-// Get count for a specific city
-app.get("/api/v1/city-count/:city", (req, res) => {
-  const city = req.params.city;
-  const count = checkCityCount(users, city);
-  res.json({ city, count });
-  // GET /api/v1/city-count/Pune → { "city": "Pune", "count": 2 }
-});
+app.listen(3000);
+// GET /city-count/Mumbai → { "city": "Mumbai", "count": 2 }
+```
 
 app.listen(8000, () => {
   console.log("Server Up and Running");
