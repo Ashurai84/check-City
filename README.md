@@ -25,45 +25,72 @@ npm install @ashuhrai_71/city-count
 ```javascript
 const checkCityCount = require('@ashuhrai_71/city-count');
 
-// Sample data - array of people with city information
-const people = [
-  { name: 'Rahul', city: 'Delhi' },
+// Sample data - array of users with city information
+const users = [
+  { name: 'Saurabh', city: 'Mumbai' },
+  { name: 'Tejas', city: 'Pune' },
+  { name: 'Ashutosh', city: 'Delhi' },
   { name: 'Priya', city: 'Mumbai' },
-  { name: 'Amit', city: 'Delhi' },
-  { name: 'Sneha', city: 'Bangalore' },
-  { name: 'Vikram', city: 'delhi' },  // lowercase - still matches!
-  { name: 'Anjali', city: 'Mumbai' }
+  { name: 'Rahul', city: 'Pune' },
+  { name: 'Neha', city: 'Delhi' }
 ];
-
-// Count people in Delhi
-const delhiCount = checkCityCount(people, 'Delhi');
-console.log(`People in Delhi: ${delhiCount}`);
-// Output: People in Delhi: 3
 
 // Count people in Mumbai
-const mumbaiCount = checkCityCount(people, 'mumbai');
+const mumbaiCount = checkCityCount(users, 'Mumbai');
 console.log(`People in Mumbai: ${mumbaiCount}`);
 // Output: People in Mumbai: 2
+
+// Count people in Pune
+const puneCount = checkCityCount(users, 'Pune');
+console.log(`People in Pune: ${puneCount}`);
+// Output: People in Pune: 2
+
+// Count people in Delhi (case-insensitive!)
+const delhiCount = checkCityCount(users, 'delhi');
+console.log(`People in Delhi: ${delhiCount}`);
+// Output: People in Delhi: 2
 ```
 
-### Real-World Use Case
+### Real-World Use Case: Express.js API
 
 ```javascript
-const checkCityCount = require('@ashuhrai_71/city-count');
+import express from "express";
+import cors from "cors";
+import checkCityCount from "@ashuhrai_71/city-count";
 
-// Employee database
-const employees = [
-  { id: 1, name: 'John Doe', city: 'New York', department: 'Engineering' },
-  { id: 2, name: 'Jane Smith', city: 'Los Angeles', department: 'Marketing' },
-  { id: 3, name: 'Bob Wilson', city: 'New York', department: 'Sales' },
-  { id: 4, name: 'Alice Brown', city: 'Chicago', department: 'Engineering' },
-  { id: 5, name: 'Charlie Davis', city: 'new york', department: 'HR' }
+const app = express();
+app.use(cors());
+
+// User data
+const users = [
+  { name: "Saurabh", city: "Mumbai" },
+  { name: "Tejas", city: "Pune" },
+  { name: "Ashutosh", city: "Delhi" },
+  { name: "Priya", city: "Mumbai" },
+  { name: "Rahul", city: "Pune" },
+  { name: "Neha", city: "Delhi" }
 ];
 
-// Get count of employees in New York
-const nyEmployees = checkCityCount(employees, 'New York');
-console.log(`Employees in New York office: ${nyEmployees}`);
-// Output: Employees in New York office: 3
+// Get all users and log city count
+app.get("/api/v1/users", (req, res) => {
+  res.json(users);
+  
+  const count = checkCityCount(users, "Mumbai");
+  console.log("Number of users in Mumbai:", count);
+  // Output: Number of users in Mumbai: 2
+});
+
+// Get count for a specific city
+app.get("/api/v1/city-count/:city", (req, res) => {
+  const city = req.params.city;
+  const count = checkCityCount(users, city);
+  res.json({ city, count });
+  // GET /api/v1/city-count/Pune → { "city": "Pune", "count": 2 }
+});
+
+app.listen(8000, () => {
+  console.log("Server Up and Running");
+});
 ```
 
 ## 📖 API Reference
