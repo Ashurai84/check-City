@@ -1,0 +1,24 @@
+{
+  "name": "check-city",
+  "version": "1.0.0",
+  "description": "A package to count how many people are in each city",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashurai84/check-City.git"
+  },
+  "keywords": [
+    "city",
+    "count",
+    "people"
+  ],
+  "author": "Ashurai84",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashurai84/check-City/issues"
+  },
+  "homepage": "https://github.com/Ashurai84/check-City#readme"
+}
